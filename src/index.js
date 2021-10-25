@@ -40,16 +40,19 @@ function checksTodoExists(request, response, next) {
   const { id } = request.params;
 
   const userExist = users.find(user => user.username === username);
+
   if(!userExist) {
     return response.status(404).send();
   }
 
   const idIsUuid = validate(id);
+  
   if(!idIsUuid) {
     return response.status(400).send();
   }
 
   const todoExist = userExist.todo.find(todo => todo.id === id);
+  
   if(!todoExist){
     return response.status(404).send();
   }
